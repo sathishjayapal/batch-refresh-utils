@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{jobNotificationSubscription.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{jobNotificationSubscription.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/jobNotificationSubscriptions/add}" class="btn btn-primary ms-2">[[#{jobNotificationSubscription.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${jobNotificationSubscriptions.empty}">[[#{jobNotificationSubscription.list.empty}]]</div>
+            <div th:if="${!jobNotificationSubscriptions.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{jobNotificationSubscription.id.label}]]</th>
+                            <th scope="col">[[#{jobNotificationSubscription.recipientEmail.label}]]</th>
+                            <th scope="col">[[#{jobNotificationSubscription.notifyOn.label}]]</th>
+                            <th scope="col">[[#{jobNotificationSubscription.createdAt.label}]]</th>
+                            <th scope="col">[[#{jobNotificationSubscription.updatedAt.label}]]</th>
+                            <th scope="col">[[#{jobNotificationSubscription.job.label}]]</th>
+                            <th scope="col">[[#{jobNotificationSubscription.template.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="jobNotificationSubscription : ${jobNotificationSubscriptions}">
+                            <td>[[${jobNotificationSubscription.id}]]</td>
+                            <td>[[${jobNotificationSubscription.recipientEmail}]]</td>
+                            <td>[[${jobNotificationSubscription.notifyOn}]]</td>
+                            <td>[[${jobNotificationSubscription.createdAt}]]</td>
+                            <td>[[${jobNotificationSubscription.updatedAt}]]</td>
+                            <td>[[${jobNotificationSubscription.job}]]</td>
+                            <td>[[${jobNotificationSubscription.template}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/jobNotificationSubscriptions/edit/{id}(id=${jobNotificationSubscription.id})}" class="btn btn-sm btn-secondary">[[#{jobNotificationSubscription.list.edit}]]</a>
+                                    <form th:action="@{/jobNotificationSubscriptions/delete/{id}(id=${jobNotificationSubscription.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{jobNotificationSubscription.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

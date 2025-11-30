@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{batchJob.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{batchJob.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/batchJobs/add}" class="btn btn-primary ms-2">[[#{batchJob.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${batchJobs.empty}">[[#{batchJob.list.empty}]]</div>
+            <div th:if="${!batchJobs.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{batchJob.id.label}]]</th>
+                            <th scope="col">[[#{batchJob.name.label}]]</th>
+                            <th scope="col">[[#{batchJob.scheduleCron.label}]]</th>
+                            <th scope="col">[[#{batchJob.isActive.label}]]</th>
+                            <th scope="col">[[#{batchJob.createdAt.label}]]</th>
+                            <th scope="col">[[#{batchJob.updatedAt.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="batchJob : ${batchJobs}">
+                            <td>[[${batchJob.id}]]</td>
+                            <td>[[${batchJob.name}]]</td>
+                            <td>[[${batchJob.scheduleCron}]]</td>
+                            <td>[[${batchJob.isActive}]]</td>
+                            <td>[[${batchJob.createdAt}]]</td>
+                            <td>[[${batchJob.updatedAt}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/batchJobs/edit/{id}(id=${batchJob.id})}" class="btn btn-sm btn-secondary">[[#{batchJob.list.edit}]]</a>
+                                    <form th:action="@{/batchJobs/delete/{id}(id=${batchJob.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{batchJob.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{jobRunEmail.edit.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{jobRunEmail.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/jobRunEmails}" class="btn btn-secondary">[[#{jobRunEmail.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('jobRunEmail')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <input type="submit" th:value="#{jobRunEmail.edit.headline}" class="btn btn-primary mt-4 mb-4" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='id', disabled=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='recipientEmail', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='recipientName')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='subject', required=true, type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='body', required=true, type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='status', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='sentAt')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='errorMessage', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='createdAt', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='updatedAt', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='jobRun', required=true, type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='jobRunEmail', field='template', type='select')}" />
+                <input type="submit" th:value="#{jobRunEmail.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

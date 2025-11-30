@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{batchJob.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{batchJob.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/batchJobs}" class="btn btn-secondary">[[#{batchJob.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('batchJob')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='batchJob', field='name', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJob', field='description', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJob', field='scheduleCron')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJob', field='isActive', type='checkbox')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJob', field='createdAt', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJob', field='updatedAt', required=true)}" />
+                <input type="submit" th:value="#{batchJob.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

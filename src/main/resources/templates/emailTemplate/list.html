@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{emailTemplate.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{emailTemplate.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/emailTemplates/add}" class="btn btn-primary ms-2">[[#{emailTemplate.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${emailTemplates.empty}">[[#{emailTemplate.list.empty}]]</div>
+            <div th:if="${!emailTemplates.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{emailTemplate.id.label}]]</th>
+                            <th scope="col">[[#{emailTemplate.code.label}]]</th>
+                            <th scope="col">[[#{emailTemplate.isActive.label}]]</th>
+                            <th scope="col">[[#{emailTemplate.createdAt.label}]]</th>
+                            <th scope="col">[[#{emailTemplate.updatedAt.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="emailTemplate : ${emailTemplates}">
+                            <td>[[${emailTemplate.id}]]</td>
+                            <td>[[${emailTemplate.code}]]</td>
+                            <td>[[${emailTemplate.isActive}]]</td>
+                            <td>[[${emailTemplate.createdAt}]]</td>
+                            <td>[[${emailTemplate.updatedAt}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/emailTemplates/edit/{id}(id=${emailTemplate.id})}" class="btn btn-sm btn-secondary">[[#{emailTemplate.list.edit}]]</a>
+                                    <form th:action="@{/emailTemplates/delete/{id}(id=${emailTemplate.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{emailTemplate.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{batchJobRun.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{batchJobRun.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/batchJobRuns/add}" class="btn btn-primary ms-2">[[#{batchJobRun.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${batchJobRuns.empty}">[[#{batchJobRun.list.empty}]]</div>
+            <div th:if="${!batchJobRuns.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{batchJobRun.id.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.startedAt.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.finishedAt.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.status.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.triggerType.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.createdAt.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.updatedAt.label}]]</th>
+                            <th scope="col">[[#{batchJobRun.job.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="batchJobRun : ${batchJobRuns}">
+                            <td>[[${batchJobRun.id}]]</td>
+                            <td>[[${batchJobRun.startedAt}]]</td>
+                            <td>[[${batchJobRun.finishedAt}]]</td>
+                            <td>[[${batchJobRun.status}]]</td>
+                            <td>[[${batchJobRun.triggerType}]]</td>
+                            <td>[[${batchJobRun.createdAt}]]</td>
+                            <td>[[${batchJobRun.updatedAt}]]</td>
+                            <td>[[${batchJobRun.job}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/batchJobRuns/edit/{id}(id=${batchJobRun.id})}" class="btn btn-sm btn-secondary">[[#{batchJobRun.list.edit}]]</a>
+                                    <form th:action="@{/batchJobRuns/delete/{id}(id=${batchJobRun.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{batchJobRun.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

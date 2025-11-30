@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{jobRunEmail.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{jobRunEmail.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/jobRunEmails/add}" class="btn btn-primary ms-2">[[#{jobRunEmail.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${jobRunEmails.empty}">[[#{jobRunEmail.list.empty}]]</div>
+            <div th:if="${!jobRunEmails.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{jobRunEmail.id.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.recipientEmail.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.recipientName.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.status.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.sentAt.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.createdAt.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.updatedAt.label}]]</th>
+                            <th scope="col">[[#{jobRunEmail.jobRun.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="jobRunEmail : ${jobRunEmails}">
+                            <td>[[${jobRunEmail.id}]]</td>
+                            <td>[[${jobRunEmail.recipientEmail}]]</td>
+                            <td>[[${jobRunEmail.recipientName}]]</td>
+                            <td>[[${jobRunEmail.status}]]</td>
+                            <td>[[${jobRunEmail.sentAt}]]</td>
+                            <td>[[${jobRunEmail.createdAt}]]</td>
+                            <td>[[${jobRunEmail.updatedAt}]]</td>
+                            <td>[[${jobRunEmail.jobRun}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/jobRunEmails/edit/{id}(id=${jobRunEmail.id})}" class="btn btn-sm btn-secondary">[[#{jobRunEmail.list.edit}]]</a>
+                                    <form th:action="@{/jobRunEmails/delete/{id}(id=${jobRunEmail.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{jobRunEmail.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

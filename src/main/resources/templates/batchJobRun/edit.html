@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{batchJobRun.edit.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{batchJobRun.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/batchJobRuns}" class="btn btn-secondary">[[#{batchJobRun.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('batchJobRun')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <input type="submit" th:value="#{batchJobRun.edit.headline}" class="btn btn-primary mt-4 mb-4" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='id', disabled=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='startedAt', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='finishedAt')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='status', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='triggerType', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='inputParams', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='resultSummary', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='errorMessage', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='createdAt', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='updatedAt', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='batchJobRun', field='job', required=true, type='select')}" />
+                <input type="submit" th:value="#{batchJobRun.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>
