@@ -28,7 +28,18 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,info,metrics
   endpoint:
     health:
       show-details: always
+      show-components: always
+batch:
+  job:
+    scheduler-pool-size: 10
+    executor-pool-size: 5
+    executor-queue-capacity: 100
+    max-retry-attempts: 3
+    retry-delay-millis: 5000
+    job-timeout-minutes: 60
+    enable-scheduling: true
+    scheduler-refresh-interval-minutes: 5
