@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
-import me.sathish.aws_refresh.validation.ValidCron;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -23,7 +22,6 @@ public class BatchJobDTO {
     private String description;
 
     @Size(max = 100)
-    @ValidCron(allowNull = true)
     private String scheduleCron;
 
     @NotNull

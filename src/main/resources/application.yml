@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:7433/aws-refresh}
-    username: ${JDBC_DATABASE_USERNAME:psqladmin}
-    password: ${JDBC_DATABASE_PASSWORD:psqladminpas$}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/aws-refresh}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:<<YOUR_PASSWORD>>}
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
@@ -28,18 +28,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health
   endpoint:
     health:
       show-details: always
-      show-components: always
-batch:
-  job:
-    scheduler-pool-size: 10
-    executor-pool-size: 5
-    executor-queue-capacity: 100
-    max-retry-attempts: 3
-    retry-delay-millis: 5000
-    job-timeout-minutes: 60
-    enable-scheduling: true
-    scheduler-refresh-interval-minutes: 5

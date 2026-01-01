@@ -8,6 +8,8 @@ CREATE TABLE batch_job (
     is_active BOOLEAN NOT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    date_created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    last_updated TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT batch_job_pkey PRIMARY KEY (id)
 );
 
@@ -23,6 +25,8 @@ CREATE TABLE batch_job_run (
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     job_id BIGINT NOT NULL,
+    date_created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    last_updated TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT batch_job_run_pkey PRIMARY KEY (id)
 );
 
@@ -34,6 +38,8 @@ CREATE TABLE email_template (
     is_active BOOLEAN NOT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    date_created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    last_updated TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT email_template_pkey PRIMARY KEY (id)
 );
 
@@ -50,6 +56,8 @@ CREATE TABLE job_run_email (
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     job_run_id BIGINT NOT NULL,
     template_id BIGINT,
+    date_created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    last_updated TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT job_run_email_pkey PRIMARY KEY (id)
 );
 
@@ -61,6 +69,8 @@ CREATE TABLE job_notification_subscription (
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     job_id BIGINT NOT NULL,
     template_id BIGINT NOT NULL,
+    date_created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    last_updated TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT job_notification_subscription_pkey PRIMARY KEY (id)
 );
 
